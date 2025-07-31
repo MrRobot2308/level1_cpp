@@ -19,3 +19,16 @@ void
 linked_list::register_free(void (*free)(void*)) {
     linked_list::free_fptr = free;
 }
+
+linked_list:: linked_list(){
+    linked_list::head = nullptr;    
+}
+
+linked_list:: ~linked_list() {
+    while (head != nullptr) {
+        node *temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
