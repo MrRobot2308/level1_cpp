@@ -34,7 +34,8 @@ void gracefully_exit_on_suspected_infinite_loop(int signal_number) {
 
     // We really don't care about whether write() succeeded or failed
     // or whether a partial write occurred. Further, we only install
-    // this function to one signal handler, so we can ignore that as well.
+    // this function to one signal handler, so we can ignore that as well. 
+    //TEST
     //
     (void)retval;
     (void)signal_number;
