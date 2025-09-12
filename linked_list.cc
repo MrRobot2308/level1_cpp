@@ -48,7 +48,8 @@ void linked_list::register_free(void (*free)(void*)) {
 }
 
 linked_list:: linked_list(){
-    linked_list::head = nullptr;    
+    linked_list::head = nullptr;
+    linked_list::ll_size = 0;  
 }
 
 linked_list:: ~linked_list() {
@@ -57,6 +58,51 @@ linked_list:: ~linked_list() {
         head = head->next;
         delete temp;
     }
+}
+
+bool linked_list::insert(size_t index, unsigned int data){
+    if(index > ll_size)
+        return false;
+
+    node* new_node = new linked_list::node();
+    new_node->data = data;
+    new_node->next = nullptr;
+
+    if(index == 0){
+        new_node->next = head;
+        head = new_node;
+    } else {
+        node* current = head;
+        for(size_t i = 0; i < index - 1; i++)
+            current = current->next;
+
+        new_node->next = current->next;
+        current->next = new_node;
+    }
+    ll_size++;
+    return true;
+}
+
+bool linked_list:: insert_front(unsigned int data){
+    return linked_list::insert(0, data);
+}
+
+bool linked_list:: insert_end(unsigned int data){
+    return linked_list::insert(ll_size, data);
+}
+
+size_t linked_list::find(unsigned int data) const{
+    node* current = head;
+    size_t index = 0;
+
+    while (current != nullptr)
+    {
+        if (current->data == data)
+            return index;
+        current = current->next;
+        index++;
+    }
+    return SIZE_MAX;
 }
 
 
